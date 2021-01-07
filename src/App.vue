@@ -21,14 +21,22 @@ export default {
   box-sizing: border-box;
 }
 
+:root {
+  --primary-color: #3c198a;
+  --secondary-color: #c594e3;
+}
+
 html {
   font-family: sans-serif;
-  font-smoothing: auto;
   -webkit-font-smoothing: auto;
   -moz-osx-font-smoothing: auto;
 }
 
 body {
   margin: 0;
+}
+
+main {
+  margin-top: 100px;
 }
 </style>

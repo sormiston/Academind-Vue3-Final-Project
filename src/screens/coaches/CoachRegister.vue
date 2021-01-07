@@ -1,0 +1,3 @@
+<template>
+  COACH REGISTER
+</template>

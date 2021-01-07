@@ -1,4 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import CoachesList from './screens/coaches/CoachesList.vue'
+import CoachDetail from './screens/coaches/CoachDetail.vue'
+import CoachRegister from './screens/coaches/CoachRegister.vue'
+import ContactCoach from './screens/requests/ContactCoach.vue'
+import RequestReceived from './screens/requests/RequestReceived.vue'
+import NotFound from './screens/NotFound.vue'
+
 
 const router = createRouter({
   history: createWebHistory(),
@@ -7,24 +14,24 @@ const router = createRouter({
     {
       name: 'coaches',
       path: '/coaches',
-      components: null,
+      component: CoachesList,
     },
     {
       name: 'coachDetail',
       path: '/coach/:id',
-      components: null,
+      component: CoachDetail,
       props: true,
       children: [
         {
           path: 'contact',
-          components: null,
+          component: ContactCoach,
           props: true,
         },
       ],
     },
-    { name: 'register', path: '/register', components: null },
-    { name: 'requests', path: '/requests', components: null },
-    { path: '/:notFound(.*)', components: null }
+    { name: 'register', path: '/register', component: CoachRegister },
+    { name: 'requests', path: '/requests', component: RequestReceived },
+    { path: '/:notFound(.*)', component: NotFound }
   ],
 });
 

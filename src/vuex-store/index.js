@@ -1,11 +1,11 @@
 import { createStore } from 'vuex'
+import coachesModule from './modules/coaches/index.js'
 
 const store = createStore({
-  state() {
-    return {
-      coaches: [
-        { id: }
-      ]
-    }
+  modules: {
+    coaches: coachesModule
   }
 })
+
+
+export default store

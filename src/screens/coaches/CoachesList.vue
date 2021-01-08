@@ -1,6 +1,6 @@
 <template>
   <section>
-    <the-filter></the-filter>
+    <the-filter :filters="filters" @update-filters="updateFilters"></the-filter>
   </section>
   <base-card>
     <section>
@@ -37,12 +37,42 @@ export default {
     TheFilter,
     CoachItem,
   },
+  data() {
+    return {
+      filters: {
+        frontend: true,
+        backend: true,
+        career: true,
+      },
+    };
+  },
   computed: {
     filteredCoaches() {
-      return this.$store.getters['coaches/coaches'];
+      let coaches = this.$store.getters['coaches/coaches'];
+      // @func : REFINE RESULT FILTER (no filters == all results)
+      for (let [area, filterActive] of Object.entries(this.filters)) {
+        if (filterActive)
+          coaches = coaches.filter((coach) => coach.areas.includes(area));
+      }
+      return coaches;
+      
+      // @ func : TOGGLE SHOW FILTER (no 'filters' === no results)
+      // return coaches.filter(coach => {
+      //   if (this.filters.frontend && coach.areas.includes('frontend')) return true
+      //   if (this.filters.backend && coach.areas.includes('backend')) return true
+      //   if (this.filters.career && coach.areas.includes('career')) return true
+      //   return false
+      // })
+      
+      
     },
     hasCoaches() {
       return this.$store.getters['coaches/hasCoaches'];
+    },
+  },
+  methods: {
+    updateFilters(updateObj) {
+      this.filters = updateObj;
     },
   },
 };

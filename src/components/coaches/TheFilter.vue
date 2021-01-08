@@ -1,6 +1,6 @@
 <template>
   <base-card>
-    <h3>Find Your Coach</h3>
+    <h2>Find Your Coach</h2>
     <form>
       <div class="control-group">
         <input id="spec-frontend" type="checkbox" name="specialization" /><label
@@ -24,23 +24,14 @@
   </base-card>
 </template>
 
-<script>
-import BaseCard from '../baseUI/BaseCard.vue';
-export default {
-  components: {
-    BaseCard,
-  },
-};
-</script>
-
 <style scoped>
-h3 {
+h2 {
   margin: 0.5rem 0;
 }
 form {
   display: flex;
 }
-.control-group{
+.control-group {
   margin-right: 1rem;
 }
 </style>

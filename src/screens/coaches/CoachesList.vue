@@ -1,29 +1,41 @@
 <template>
-  <div class="container">
+  <section>
+    <the-filter></the-filter>
+  </section>
+  <base-card>
     <section>
-      <the-filter></the-filter>
-    </section>
-    <section>
-      <div class="controls">
-        <button>Refresh</button>
-        <router-link to="/register">Register as Coach</router-link>
+      <header>
+        <base-button mode="light">Refresh</base-button>
+        <base-button link to="/register" mode="dark">
+          Register as Coach</base-button
+        >
+      </header>
 
-        <ul v-if="hasCoaches">
-          <li v-for="coach in filteredCoaches" :key="coach.id">
-            {{ coach.firstName }}
-          </li>
-        </ul>
-        <h3 v-else>No Coaches! Add one.</h3>
-      </div>
+      <ul v-if="hasCoaches">
+        <coach-item
+          v-for="coach in filteredCoaches"
+          :key="coach.id"
+          :id="coach.id"
+          :firstName="coach.firstName"
+          :lastName="coach.lastName"
+          :areas="coach.areas"
+          :description="coach.description"
+          :hourlyRate="coach.hourlyRate"
+        >
+        </coach-item>
+      </ul>
+      <h3 v-else>No Coaches! Add one.</h3>
     </section>
-  </div>
+  </base-card>
 </template>
 
 <script>
 import TheFilter from '../../components/coaches/TheFilter.vue';
+import CoachItem from '../../components/coaches/CoachItem.vue';
 export default {
   components: {
     TheFilter,
+    CoachItem,
   },
   computed: {
     filteredCoaches() {
@@ -37,5 +49,11 @@ export default {
 </script>
 
 <style scoped>
-
+header {
+  display: flex;
+  justify-content: space-between;
+}
+ul {
+  padding-left: 0;
+}
 </style>

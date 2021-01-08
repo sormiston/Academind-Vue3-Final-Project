@@ -22,8 +22,12 @@ export default {
 }
 
 :root {
-  --primary-color: #3c198a;
-  --secondary-color: #c594e3;
+  --primary-color-200: #260841;
+  --primary-color-300: #3a105f;
+  --primary-color-400: #3c198a;
+  --primary-color-500: #6d1d8c;
+  --primary-color-600: #881b6d;
+  --primary-color-800: #c594e3;
 }
 
 html {

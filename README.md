@@ -15,10 +15,11 @@
    * _State_: List of Coaches
       * _COACH:_
         * id
-        * first Name
-        * last Name
+        * firstName
+        * lastName
+        * areas
         * description
-        * rate
+        * hourlyRate
     * _Mutations_:
       * register new coach (CREATE)
       * DB fetch and set coaches (READ)

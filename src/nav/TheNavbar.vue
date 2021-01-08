@@ -5,12 +5,12 @@
       <ul>
         <li>
           <router-link to="/coaches">
-            <button>All Coaches</button>
+            All Coaches
           </router-link>
         </li>
         <li>
           <router-link to="/requests">
-            <button>Requests</button>
+            Requests
           </router-link>
         </li>
       </ul>
@@ -29,7 +29,7 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: var(--primary-color);
+  background-color: var(--primary-color-400);
   display: flex;
   padding: 0 4rem;
   justify-content: space-between;
@@ -49,24 +49,20 @@ ul {
 li {
   margin: 0 0.5rem;
 }
-button {
-  padding: 0.75rem 1rem;
-  background-color: var(--primary-color);
-  border: 1px solid transparent;
-  cursor: pointer;
-  color: var(--secondary-color);
-  font-family: sans-serif;
-  font-size: 0.85rem;
-}
-
 a {
   display: inline-block;
-  width: 100%;
-  height: 100%;
+  padding: 0.75rem 1rem;
+  background-color: var(--primary-color-400);
+  border: 1px solid transparent;
+  cursor: pointer;
+  color: var(--primary-color-800);
+  font-family: sans-serif;
+  font-size: 1rem;
+  text-decoration: none;
 }
 
-a.router-link-active > button,
-a:hover > button {
-  border: 1px solid var(--secondary-color);
+a.router-link-active,
+a:hover  {
+  border: 1px solid var(--primary-color-800);
 }
 </style>

@@ -57,10 +57,6 @@ li.item-card {
   display: flex;
   justify-content: flex-end;
 }
-.badge-list > *,
-.action-buttons > * {
-  margin-right: 0.5rem;
-}
 
 h2,
 h3 {

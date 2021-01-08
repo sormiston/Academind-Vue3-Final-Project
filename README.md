@@ -39,7 +39,7 @@
 
 1. Routing + Screen Components
   * /coaches                      -- coachesList
-  * /coaches/:id                  -- coachDetails
+  * /coaches/:id                  -- coachDetail
   * /register                     -- coachRegistration
   * /coaches/:id/contact          -- contactCoach
   * /requests                     -- requestsReceieved

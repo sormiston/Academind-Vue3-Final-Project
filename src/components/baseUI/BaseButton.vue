@@ -40,13 +40,14 @@ export default {
 <style scoped>
 button,
 a {
+  display: inline-block;
   padding: 0.75rem 1.25rem;
   cursor: pointer;
   border-radius: 25px;
-  font-family: sans-serif;
-  font-size: 0.85rem;
+  font: inherit;
   border: 1px solid var(--primary-color-300);
   text-decoration: none;
+  margin-right: .5rem;
 }
 
 .button--light {

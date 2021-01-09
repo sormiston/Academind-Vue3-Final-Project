@@ -1,6 +1,5 @@
 # Plan
 
-
 ## MVP
 * Resources to browse, review and contact coaches
   * List all available coaches

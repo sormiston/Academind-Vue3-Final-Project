@@ -24,7 +24,8 @@ const router = createRouter({
       children: [
         {
           path: 'contact',
-          component: ContactCoach,  
+          component: ContactCoach,
+          props: true
         },
       ],
     },

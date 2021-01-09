@@ -9,7 +9,8 @@
     <base-card>
       <header>
         <h2>Interested? Reach out now!</h2>
-        <base-button link :to="contactLink">Contact</base-button>
+        
+        <base-button v-if="!contactFormIsOpen" link :to="contactLink">Contact</base-button>
       </header>
       <router-view></router-view>
     </base-card>
@@ -42,6 +43,9 @@ export default {
     },
     contactLink() {
       return this.$route.path + '/contact'
+    },
+    contactFormIsOpen() {
+      return this.$route.path.endsWith('contact')
     }
   },
   created() {

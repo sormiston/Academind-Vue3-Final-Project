@@ -26,6 +26,7 @@ export default {
   font-size: .85rem;
   vertical-align: bottom;
   margin-right: .5rem;
+  margin-bottom: .5rem;
 }
 
 .badge--frontend {

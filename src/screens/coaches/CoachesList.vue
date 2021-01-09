@@ -6,7 +6,7 @@
     <section>
       <header>
         <base-button mode="light">Refresh</base-button>
-        <base-button link to="/register" mode="dark">
+        <base-button v-if="!userIsCoach" link to="/register" mode="dark">
           Register as Coach</base-button
         >
       </header>
@@ -65,6 +65,9 @@ export default {
       // })
       
       
+    },
+    userIsCoach() {
+      return this.$store.getters['coaches/isCoach']
     },
     hasCoaches() {
       return this.$store.getters['coaches/hasCoaches'];

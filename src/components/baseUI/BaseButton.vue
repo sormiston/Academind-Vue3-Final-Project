@@ -48,6 +48,7 @@ a {
   border: 1px solid var(--primary-color-300);
   text-decoration: none;
   margin-right: .5rem;
+  margin-bottom: .5rem;
 }
 
 .button--light {

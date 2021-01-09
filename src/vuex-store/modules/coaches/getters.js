@@ -7,5 +7,10 @@ export default {
   },
   getCoach(state) {
     return (id) => state.coaches.find(coach => coach.id === id)
+  },
+  isCoach(_, getters, _2, rootGetters) {
+    const coaches = getters.coaches
+    const userId = rootGetters.userId
+    return coaches.some(coach => coach.id === userId)
   }
 }

@@ -43,3 +43,9 @@
   * /coaches/:id/contact          -- contactCoach
   * /requests                     -- requestsReceieved
   
+## Backend Calls
+
+* PUT to upgrade user to coach on Vuex ACTION ['coaches/registerCoach']
+* GET list of coaches on CoachesList load
+* GET all requests on RequestsReceived load
+* POST new request on Vuex Action ['requests/newRequest']

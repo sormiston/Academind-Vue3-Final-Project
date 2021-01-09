@@ -5,7 +5,7 @@
   <base-card>
     <section>
       <header>
-        <base-button mode="light">Refresh</base-button>
+        <base-button @click="loadCoaches" mode="light">Refresh</base-button>
         <base-button v-if="!userIsCoach" link to="/register" mode="dark">
           Register as Coach</base-button
         >
@@ -50,24 +50,24 @@ export default {
     filteredCoaches() {
       let coaches = this.$store.getters['coaches/coaches'];
       // @func : REFINE RESULT FILTER (no filters == all results)
-      for (let [area, filterActive] of Object.entries(this.filters)) {
-        if (filterActive)
-          coaches = coaches.filter((coach) => coach.areas.includes(area));
-      }
-      return coaches;
-      
+      // for (let [area, filterActive] of Object.entries(this.filters)) {
+      //   if (filterActive)
+      //     coaches = coaches.filter((coach) => coach.areas.includes(area));
+      // }
+      // return coaches;
+
       // @ func : TOGGLE SHOW FILTER (no 'filters' === no results)
-      // return coaches.filter(coach => {
-      //   if (this.filters.frontend && coach.areas.includes('frontend')) return true
-      //   if (this.filters.backend && coach.areas.includes('backend')) return true
-      //   if (this.filters.career && coach.areas.includes('career')) return true
-      //   return false
-      // })
-      
-      
+      return coaches.filter((coach) => {
+        if (this.filters.frontend && coach.areas.includes('frontend'))
+          return true;
+        if (this.filters.backend && coach.areas.includes('backend'))
+          return true;
+        if (this.filters.career && coach.areas.includes('career')) return true;
+        return false;
+      });
     },
     userIsCoach() {
-      return this.$store.getters['coaches/isCoach']
+      return this.$store.getters['coaches/isCoach'];
     },
     hasCoaches() {
       return this.$store.getters['coaches/hasCoaches'];
@@ -77,6 +77,12 @@ export default {
     updateFilters(updateObj) {
       this.filters = updateObj;
     },
+    loadCoaches() {
+      this.$store.dispatch('coaches/loadCoaches');
+    },
+  },
+  created() {
+    this.loadCoaches;
   },
 };
 </script>

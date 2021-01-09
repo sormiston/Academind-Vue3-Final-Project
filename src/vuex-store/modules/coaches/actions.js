@@ -1,18 +1,46 @@
+import axios from '../../../axios';
+
 export default {
-  registerCoach(context, payload) {
-    // dynamically generate new id based on last in list
-    // const currentCoaches = context.getters.coaches
-    // const lastIdNum = Number(currentCoaches[currentCoaches.length - 1].id[1])
-    // const newId = 'c' + (lastIdNum + 1)
-    
+  async registerCoach(context, payload) {
     const newCoach = {
       id: context.rootGetters.userId,
       firstName: payload.first,
       lastName: payload.last,
       areas: payload.areas,
-      description:payload.desc,
+      description: payload.desc,
       hourlyRate: payload.rate
     };
-    context.commit('registerCoach', newCoach)
+
+    try {
+      const userId = context.rootGetters.userId;
+      const response = await axios.put(
+        `coaches/${userId}.json`,
+        JSON.stringify(newCoach)
+      );
+      console.log(new Date().getTime);
+      console.log(response);
+      if (response.status < 200 || response.status >= 300)
+        throw new Error(response.status);
+      context.commit('registerCoach', newCoach);
+    } catch (err) {
+      console.error(err.message);
+    }
+  },
+
+  async loadCoaches(context) {
+    try {
+      const response = await axios('coaches.json')
+      if (response.status < 200 || response.status >= 300) throw new Error(response.status)
+      
+      const coaches = []
+      for (const key in response.data) {
+        coaches.push({
+         ...response.data[key] 
+        })
+      }
+      context.commit('setCoaches', coaches)
+    } catch (err) {
+      console.error(err.message)
+    }
   }
 };

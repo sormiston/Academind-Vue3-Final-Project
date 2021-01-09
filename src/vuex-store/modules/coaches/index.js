@@ -25,14 +25,14 @@ export default {
             'I am Julie and as a senior developer in a big tech company, I can help you get your first job or progress in your current role.',
           hourlyRate: 30
         },
-        {
-          id: 'c3',
-          firstName: 'Sean',
-          lastName: 'Ormiston',
-          areas: ['frontend'],
-          description: "Yoo I'm coding this app like RIGHT NOW see how good it is?  Hmm you should hire me.",
-          hourlyRate: 28
-        }
+        // {
+        //   id: 'c3',
+        //   firstName: 'Sean',
+        //   lastName: 'Ormiston',
+        //   areas: ['frontend'],
+        //   description: "Yoo I'm coding this app like RIGHT NOW see how good it is?  Hmm you should hire me.",
+        //   hourlyRate: 28
+        // }
       ]
     };
   },

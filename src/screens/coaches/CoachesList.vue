@@ -10,7 +10,7 @@
           Register as Coach</base-button
         >
       </header>
-
+      <p v-if="isLoading">LOADING</p>
       <ul v-if="hasCoaches">
         <coach-item
           v-for="coach in filteredCoaches"
@@ -43,6 +43,7 @@ export default {
         frontend: true,
         backend: true,
         career: true,
+        isLoading: false
       },
     };
   },
@@ -77,8 +78,10 @@ export default {
     updateFilters(updateObj) {
       this.filters = updateObj;
     },
-    loadCoaches() {
-      this.$store.dispatch('coaches/loadCoaches');
+    async loadCoaches() {
+      this.isLoading = true
+     this.$store.dispatch('coaches/loadCoaches');
+      this.isLoading = false
     },
   },
   created() {

@@ -1,8 +1,9 @@
 <template>
-  <the-navbar></the-navbar>
+  <the-navbar>
   <main>
     <router-view></router-view>
   </main>
+  </the-navbar>
 </template>
 
 <script>

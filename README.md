@@ -1,5 +1,4 @@
-## Final Project
-## Maximilian Schwarzmueller's (Academind) excellent Vue3 JS course on Udemy
+## Final Project: Maximilian Schwarzmueller's Vue3 JS course on Udemy
 
 
 ## Plan

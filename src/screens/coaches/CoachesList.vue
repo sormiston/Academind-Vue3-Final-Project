@@ -43,8 +43,8 @@ export default {
         frontend: true,
         backend: true,
         career: true,
-        isLoading: false
       },
+      isLoading: false
     };
   },
   computed: {
@@ -80,12 +80,12 @@ export default {
     },
     async loadCoaches() {
       this.isLoading = true
-     this.$store.dispatch('coaches/loadCoaches');
+      await this.$store.dispatch('coaches/loadCoaches');
       this.isLoading = false
     },
   },
   created() {
-    this.loadCoaches;
+    this.loadCoaches();
   },
 };
 </script>

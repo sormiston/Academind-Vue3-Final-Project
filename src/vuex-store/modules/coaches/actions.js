@@ -17,8 +17,7 @@ export default {
         `coaches/${userId}.json`,
         JSON.stringify(newCoach)
       );
-      console.log(new Date().getTime);
-      console.log(response);
+    
       if (response.status < 200 || response.status >= 300)
         throw new Error(response.status);
       context.commit('registerCoach', newCoach);
@@ -34,6 +33,7 @@ export default {
         throw new Error(response.status);
 
       const coaches = [];
+      console.log(coaches);
       for (const key in response.data) {
         coaches.push({
           ...response.data[key]

@@ -29,18 +29,19 @@ export default {
 
   async loadCoaches(context) {
     try {
-      const response = await axios('coaches.json')
-      if (response.status < 200 || response.status >= 300) throw new Error(response.status)
-      
-      const coaches = []
+      const response = await axios('coaches.json');
+      if (response.status < 200 || response.status >= 300)
+        throw new Error(response.status);
+
+      const coaches = [];
       for (const key in response.data) {
         coaches.push({
-         ...response.data[key] 
-        })
+          ...response.data[key]
+        });
       }
-      context.commit('setCoaches', coaches)
+      context.commit('setCoaches', coaches);
     } catch (err) {
-      console.error(err.message)
+      console.error(err.message);
     }
   }
 };

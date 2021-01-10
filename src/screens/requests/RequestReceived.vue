@@ -15,6 +15,12 @@
 <script>
 import RequestItem from '../../components/requests/RequestItem.vue';
 export default {
+  data() {
+    return {
+      isLoading: false,
+      error: null
+    }
+  },
   components: {
     RequestItem
   },
@@ -26,6 +32,20 @@ export default {
       return this.$store.getters['requests/hasRequests'];
     },
   },
+  methods: {
+    async loadRequests() {
+      try {
+      this.isLoading = true
+      await this.$store.dispatch('requests/fetchRequests')
+      this.isLoading = false
+      } catch (err) {
+        this.error = err.message || 'Something failed' 
+      }
+    }
+  },
+  created() {
+    this.loadRequests()
+  }
 };
 </script>
 

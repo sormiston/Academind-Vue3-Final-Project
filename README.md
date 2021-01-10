@@ -1,3 +1,6 @@
+## Final Project of Maximilian Schwarzmueller's (Academind) excellent Vue3 JS course on Udemy
+
+
 # Plan
 
 ## MVP

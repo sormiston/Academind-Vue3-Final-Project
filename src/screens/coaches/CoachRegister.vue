@@ -16,6 +16,7 @@ export default {
   },
   methods: {
     saveData(formData) {
+      console.log("saveData firing");
       this.$store.dispatch('coaches/registerCoach', formData)
       this.$router.replace('/coaches')
     }

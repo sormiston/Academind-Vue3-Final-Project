@@ -150,7 +150,6 @@ export default {
 
     submitForm() {
       this.validateForm();
-      console.log(this.formIsValid);
       if (!this.formIsValid) return;
       const formData = {
         first: this.form.firstName.value,

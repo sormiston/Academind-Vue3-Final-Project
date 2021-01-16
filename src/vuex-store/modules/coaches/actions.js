@@ -11,37 +11,21 @@ export default {
       hourlyRate: payload.rate
     };
 
-    try {
-      const userId = context.rootGetters.userId;
-      const response = await axios.put(
-        `coaches/${userId}.json`,
-        JSON.stringify(newCoach)
-      );
-    
-      if (response.status < 200 || response.status >= 300)
-        throw new Error(response.status);
-      context.commit('registerCoach', newCoach);
-    } catch (err) {
-      console.error(err.message);
-    }
+    const userId = context.rootGetters.userId;
+    await axios.put(`coaches/${userId}.json`, JSON.stringify(newCoach));
+
+    context.commit('registerCoach', newCoach);
   },
 
+  // ERROR HANDLING BY COMPONENT-SIDE TRY/CATCH BLOCK
   async loadCoaches(context) {
-    try {
-      const response = await axios('coaches.json');
-      if (response.status < 200 || response.status >= 300)
-        throw new Error(response.status);
-
-      const coaches = [];
-      console.log(coaches);
-      for (const key in response.data) {
-        coaches.push({
-          ...response.data[key]
-        });
-      }
-      context.commit('setCoaches', coaches);
-    } catch (err) {
-      console.error(err.message);
+    const response = await axios('coaches.json');
+    const coaches = [];
+    for (const key in response.data) {
+      coaches.push({
+        ...response.data[key]
+      });
     }
+    context.commit('setCoaches', coaches);
   }
 };

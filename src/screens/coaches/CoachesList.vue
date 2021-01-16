@@ -1,4 +1,7 @@
 <template>
+  <base-dialog :show="!!error" title="Error" @close="handleError">
+    <p>{{ error }}</p>
+  </base-dialog>
   <section>
     <the-filter :filters="filters" @update-filters="updateFilters"></the-filter>
   </section>
@@ -10,8 +13,10 @@
           Register as Coach</base-button
         >
       </header>
-      <p v-if="isLoading">LOADING</p>
-      <ul v-if="hasCoaches">
+      <div v-if="isLoading">
+        <base-spinner />
+      </div>
+      <ul v-else-if="hasCoaches">
         <coach-item
           v-for="coach in filteredCoaches"
           :key="coach.id"
@@ -44,7 +49,8 @@ export default {
         backend: true,
         career: true,
       },
-      isLoading: false
+      isLoading: false,
+      error: null,
     };
   },
   computed: {
@@ -79,9 +85,18 @@ export default {
       this.filters = updateObj;
     },
     async loadCoaches() {
-      this.isLoading = true
-      await this.$store.dispatch('coaches/loadCoaches');
-      this.isLoading = false
+      this.isLoading = true;
+      
+      try {
+        await this.$store.dispatch('coaches/loadCoaches');
+      } catch (error) {
+        this.error = error.message || 'Something went wrong.';
+      }
+      
+      this.isLoading = false;
+    },
+    handleError() {
+      this.error = null;
     },
   },
   created() {

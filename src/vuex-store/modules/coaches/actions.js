@@ -18,7 +18,9 @@ export default {
   },
 
   // ERROR HANDLING BY COMPONENT-SIDE TRY/CATCH BLOCK
-  async loadCoaches(context) {
+  async loadCoaches(context, payload) {
+    
+    if (!payload.forceRefresh && !context.getters.shouldUpdate) return
     const response = await axios('coaches.json');
     const coaches = [];
     for (const key in response.data) {
@@ -27,5 +29,6 @@ export default {
       });
     }
     context.commit('setCoaches', coaches);
+    context.commit('setFetchTimestamp')
   }
 };

@@ -34,6 +34,7 @@ header {
   padding: 0 4rem;
   justify-content: space-between;
   align-items: center;
+  z-index: 100;
 }
 
 h2 {

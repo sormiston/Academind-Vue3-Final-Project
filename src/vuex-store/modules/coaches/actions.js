@@ -28,7 +28,9 @@ export default {
         ...response.data[key]
       });
     }
+    
     context.commit('setCoaches', coaches);
     context.commit('setFetchTimestamp')
+    context.getters.getAllCoachIds;
   }
 };

@@ -1,12 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import CoachesList from './screens/coaches/CoachesList.vue'
-import CoachDetail from './screens/coaches/CoachDetail.vue'
-import CoachRegister from './screens/coaches/CoachRegister.vue'
-import ContactCoach from './screens/requests/ContactCoach.vue'
-import RequestReceived from './screens/requests/RequestReceived.vue'
-import UserAuth from './screens/auth/UserAuth.vue'
-import NotFound from './screens/NotFound.vue'
-
+import CoachesList from './screens/coaches/CoachesList.vue';
+import CoachDetail from './screens/coaches/CoachDetail.vue';
+import CoachRegister from './screens/coaches/CoachRegister.vue';
+import ContactCoach from './screens/requests/ContactCoach.vue';
+import RequestReceived from './screens/requests/RequestReceived.vue';
+import UserAuth from './screens/auth/UserAuth.vue';
+import NotFound from './screens/NotFound.vue';
+import store from './vuex-store/index.js';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -15,7 +15,7 @@ const router = createRouter({
     {
       name: 'coaches',
       path: '/coaches',
-      component: CoachesList,
+      component: CoachesList
     },
     {
       name: 'coachDetail',
@@ -27,14 +27,44 @@ const router = createRouter({
           path: 'contact',
           component: ContactCoach,
           props: true
-        },
+        }
       ],
+      beforeEnter(to, _, next) {
+        if (!store.getters['coaches/getAllCoachIds'].includes(to.params.id)) {
+          next('/coaches')
+        } else {
+          next()
+        }
+      }
     },
-    { name: 'register', path: '/register', component: CoachRegister },
-    { name: 'requests', path: '/requests', component: RequestReceived },
-    { path: '/auth', component: UserAuth},
-    { path: '/:notFound(.*)', component: NotFound }
-  ],
+    {
+      name: 'register',
+      path: '/register',
+      component: CoachRegister,
+      meta: { requiresAuth: true }
+    },
+    {
+      name: 'requests',
+      path: '/requests',
+      component: RequestReceived,
+      meta: { requiresAuth: true }
+    },
+    { path: '/auth', component: UserAuth, meta: { requiresUnauth: true } },
+    {
+      path: '/:notFound(.*)',
+      component: NotFound
+    }
+  ]
 });
 
-export default router
+router.beforeEach(function(to, _, next) {
+  if (to.meta.requiresAuth && !store.getters.isAuthenticated) {
+    next('/auth');
+  } else if (to.meta.requiresUnath && store.getters.isAuthenticated) {
+    next('/coaches')
+  } else {
+    next()
+  }
+});
+
+export default router;

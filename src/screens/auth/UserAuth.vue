@@ -87,10 +87,14 @@ export default {
         }
       } catch (error) {
         this.error = error.message || 'Failed to authenticate.  Try later.';
+      } finally {
+        this.isLoading = false;
+        if (!this.error) {
+        const redirectUrl = '/' + (this.$route.query.redirect || 'coaches');
+        this.$router.replace(redirectUrl);
+        }
       }
-      
-      this.isLoading = false;
-      if (!this.error) this.$router.push('/coaches')
+
       
     },
     switchAuthMode() {

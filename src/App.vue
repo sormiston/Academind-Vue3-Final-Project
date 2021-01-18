@@ -7,7 +7,6 @@
       </transition>
     </router-view>
   </main>
-  
 </template>
 
 <script>
@@ -16,7 +15,21 @@ export default {
   components: {
     TheNavbar,
   },
-
+  computed: {
+    logoutEjected() {
+      return this.$store.getters.logoutEjected
+    }
+  },
+  watch: {
+    logoutEjected(newVal, oldVal) {
+      if (newVal === true && newVal !== oldVal) {
+        this.$router.replace('/coaches')
+      }
+    }
+  },
+  created() {
+    this.$store.dispatch('autoLogin')
+  }
 };
 </script>
 
@@ -70,7 +83,4 @@ main {
   opacity: 1;
   transform: translateY(0);
 }
-
-
-
 </style>

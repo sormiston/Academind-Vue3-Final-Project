@@ -22,7 +22,7 @@
             mode="dark"
             >Register as Coach</base-button
           >
-          <base-button v-if="!isLoggedIn" link to="/auth">Login</base-button>
+          <base-button v-if="!isLoggedIn" link to="/auth?redirect=register">Login to Register as Coach</base-button>
         </header>
         <div v-if="isLoading">
           <base-spinner />

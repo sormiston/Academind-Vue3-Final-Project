@@ -6,7 +6,7 @@ export default {
       userEmail: payload.userEmail,
       message: payload.message
     };
-
+    
       const response = await axios.post(
         `requests/${payload.coachId}.json`,
         JSON.stringify(newRequest)
@@ -22,7 +22,8 @@ export default {
 
   async fetchRequests(context) {
     const coachId = context.rootGetters.userId;
-    const response = await axios(`requests/${coachId}.json`);
+    const token = context.rootGetters.token
+    const response = await axios(`requests/${coachId}.json?auth=${token}`);
     const requests = [];
     for (const key in response.data) {
       requests.push({

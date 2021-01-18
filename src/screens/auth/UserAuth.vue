@@ -90,12 +90,10 @@ export default {
       } finally {
         this.isLoading = false;
         if (!this.error) {
-        const redirectUrl = '/' + (this.$route.query.redirect || 'coaches');
-        this.$router.replace(redirectUrl);
+          const redirectUrl = '/' + (this.$route.query.redirect || 'coaches');
+          this.$router.replace(redirectUrl);
         }
       }
-
-      
     },
     switchAuthMode() {
       if (this.mode === 'login') this.mode = 'signup';

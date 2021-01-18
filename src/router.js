@@ -29,6 +29,7 @@ const router = createRouter({
           props: true
         }
       ],
+      // do not attempt parsing slugs that do not correlate with known coach IDs
       beforeEnter(to, _, next) {
         if (!store.getters['coaches/getAllCoachIds'].includes(to.params.id)) {
           next('/coaches')

@@ -54,6 +54,7 @@ a {
 .button--light {
   background-color: #fff;
   color: var(--primary-color-300);
+  border: none;
 }
 
 .button--light:hover,

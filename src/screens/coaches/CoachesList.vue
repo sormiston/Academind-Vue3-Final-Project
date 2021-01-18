@@ -4,15 +4,25 @@
       <p>{{ error }}</p>
     </base-dialog>
     <section>
-      <the-filter :filters="filters" @update-filters="updateFilters"></the-filter>
+      <the-filter
+        :filters="filters"
+        @update-filters="updateFilters"
+      ></the-filter>
     </section>
     <base-card>
       <section>
         <header>
-          <base-button @click="loadCoaches({ forceRefresh: true })" mode="light">Refresh</base-button>
-          <base-button v-if="!userIsCoach" link to="/register" mode="dark">
-            Register as Coach</base-button
+          <base-button @click="loadCoaches({ forceRefresh: true })" mode="light"
+            >Refresh</base-button
           >
+          <base-button
+            v-if="!userIsCoach && isLoggedIn && !isLoading"
+            link
+            to="/register"
+            mode="dark"
+            >Register as Coach</base-button
+          >
+          <base-button v-if="!isLoggedIn" link to="/auth">Login</base-button>
         </header>
         <div v-if="isLoading">
           <base-spinner />
@@ -77,6 +87,9 @@ export default {
     },
     userIsCoach() {
       return this.$store.getters['coaches/isCoach'];
+    },
+    isLoggedIn() {
+      return this.$store.getters.isAuthenticated;
     },
     hasCoaches() {
       return this.$store.getters['coaches/hasCoaches'];

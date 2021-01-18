@@ -1,19 +1,21 @@
 <template>
-  <base-dialog
-    :show="isPosting || !!error || success"
-    title="Registering Coach"
-    @close="closeDialog"
-  >
-    <base-spinner v-if="isPosting" />
-    <p v-else-if="success">Coach Registered!</p>
-    <p v-else-if="!!error">Error! -- {{ error }}</p>
-  </base-dialog>
-  <section>
-    <base-card>
-      <h2>Register as a coach now!</h2>
-      <coach-form @save-data="saveData"></coach-form>
-    </base-card>
-  </section>
+  <div>
+    <base-dialog
+      :show="isPosting || !!error || success"
+      title="Registering Coach"
+      @close="closeDialog"
+    >
+      <base-spinner v-if="isPosting" />
+      <p v-else-if="success">Coach Registered!</p>
+      <p v-else-if="!!error">Error! -- {{ error }}</p>
+    </base-dialog>
+    <section>
+      <base-card>
+        <h2>Register as a coach now!</h2>
+        <coach-form @save-data="saveData"></coach-form>
+      </base-card>
+    </section>
+  </div>
 </template>
 
 

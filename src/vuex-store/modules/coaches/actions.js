@@ -12,14 +12,14 @@ export default {
     };
 
     const userId = context.rootGetters.userId;
-    await axios.put(`coaches/${userId}.json`, JSON.stringify(newCoach));
-
+    const token = context.rootGetters.token
+    const response = await axios.put(`coaches/${userId}.json?auth=${token}`, JSON.stringify(newCoach));
+    console.log(response)
     context.commit('registerCoach', newCoach);
   },
 
   // ERROR HANDLING BY COMPONENT-SIDE TRY/CATCH BLOCK
   async loadCoaches(context, payload) {
-    
     if (!payload.forceRefresh && !context.getters.shouldUpdate) return
     const response = await axios('coaches.json');
     const coaches = [];

@@ -24,15 +24,17 @@ export default {
     const token = context.rootGetters.token;
     const response = await axios(`requests/${coachId}.json?auth=${token}`);
     const requests = [];
-    const data = Object.entries(response.data);
-    data.forEach(entry => {
-      const id = entry[0];
+    if (response.data) {
+      const data = Object.entries(response.data);
+      data.forEach(entry => {
+        const id = entry[0];
 
-      requests.push({
-        ...entry[1],
-        id
+        requests.push({
+          ...entry[1],
+          id
+        });
       });
-    });
+    }
     context.commit('setRequests', requests);
   }
 };

@@ -20,6 +20,7 @@ export default {
 
   // ERROR HANDLING BY COMPONENT-SIDE TRY/CATCH BLOCK
   async loadCoaches(context, payload) {
+    if (typeof payload === 'undefined') payload = {}
     if (!payload.forceRefresh && !context.getters.shouldUpdate) return
     const response = await axios('coaches.json');
     const coaches = [];

@@ -1,12 +1,18 @@
+
 import { createRouter, createWebHistory } from 'vue-router';
 import CoachesList from './screens/coaches/CoachesList.vue';
-import CoachDetail from './screens/coaches/CoachDetail.vue';
-import CoachRegister from './screens/coaches/CoachRegister.vue';
-import ContactCoach from './screens/requests/ContactCoach.vue';
-import RequestReceived from './screens/requests/RequestReceived.vue';
+// import CoachDetail from './screens/coaches/CoachDetail.vue';
+// import CoachRegister from './screens/coaches/CoachRegister.vue';
+// import ContactCoach from './screens/requests/ContactCoach.vue';
+// import RequestReceived from './screens/requests/RequestReceived.vue';
 import UserAuth from './screens/auth/UserAuth.vue';
 import NotFound from './screens/NotFound.vue';
 import store from './vuex-store/index.js';
+
+const CoachDetail = () => import('./screens/coaches/CoachDetail.vue');
+const CoachRegister = () => import('./screens/coaches/CoachRegister.vue');
+const ContactCoach = () => import('./screens/requests/ContactCoach.vue');
+const RequestReceived = () => import('./screens/requests/RequestReceived.vue');
 
 const router = createRouter({
   history: createWebHistory(),
@@ -30,11 +36,15 @@ const router = createRouter({
         }
       ],
       // do not attempt parsing slugs that do not correlate with known coach IDs
-      beforeEnter(to, _, next) {
+      async beforeEnter(to, _, next) {
+        if (!store.getters['coaches/hasCoaches']) {
+          await store.dispatch('coaches/loadCoaches');
+        }
         if (!store.getters['coaches/getAllCoachIds'].includes(to.params.id)) {
-          next('/coaches')
+          console.log('coach not found');
+          next('/coaches');
         } else {
-          next()
+          next();
         }
       }
     },
@@ -62,9 +72,9 @@ router.beforeEach(function(to, _, next) {
   if (to.meta.requiresAuth && !store.getters.isAuthenticated) {
     next('/auth');
   } else if (to.meta.requiresUnath && store.getters.isAuthenticated) {
-    next('/coaches')
+    next('/coaches');
   } else {
-    next()
+    next();
   }
 });
 

@@ -13,8 +13,8 @@ export default {
 
     const userId = context.rootGetters.userId;
     const token = context.rootGetters.token
-    const response = await axios.put(`coaches/${userId}.json?auth=${token}`, JSON.stringify(newCoach));
-    console.log(response)
+    await axios.put(`coaches/${userId}.json?auth=${token}`, JSON.stringify(newCoach));
+    
     context.commit('registerCoach', newCoach);
   },
 

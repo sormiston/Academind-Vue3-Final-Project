@@ -1,10 +1,15 @@
 <template>
   <div>
     <base-dialog
-      :show="!!error"
-      title="An error occured"
-      @close="confirmDialog"
+      :show="!!isAlreadyCoach"
+      title="Already a registered coach!"
+      @close="$router.replace('/coaches')"
     >
+      <p>You are already registered as coach</p>
+      <h5>{{ coachIdFormatted }}</h5>
+      <p>Close this dialog to enter.</p>
+    </base-dialog>
+    <base-dialog :show="!!error" title="An error occured" @close="confirmError">
       {{ error }}
     </base-dialog>
     <base-dialog :show="isLoading" title="Authenticating..." fixed>
@@ -58,9 +63,24 @@ export default {
       if (this.mode === 'login') return 'Sign Up instead';
       else return 'Login instead';
     },
+    isAlreadyCoach() {
+      if (
+        this.$route.query.redirect === 'register' &&
+        this.$store.getters['coaches/isCoach']
+      ) {
+        return this.$store.getters['coaches/getLoggedInCoach'];
+      } else {
+        return false;
+      }
+    },
+    coachIdFormatted() {
+      if (this.isAlreadyCoach) {
+        return `${this.isAlreadyCoach.firstName} ${this.isAlreadyCoach.lastName}`;
+      } else return '';
+    },
   },
   methods: {
-    confirmDialog() {
+    confirmError() {
       this.error = null;
     },
     async submitForm() {
@@ -89,7 +109,7 @@ export default {
         this.error = error.message || 'Failed to authenticate.  Try later.';
       } finally {
         this.isLoading = false;
-        if (!this.error) {
+        if (!this.error && !this.isAlreadyCoach) {
           const redirectUrl = '/' + (this.$route.query.redirect || 'coaches');
           this.$router.replace(redirectUrl);
         }

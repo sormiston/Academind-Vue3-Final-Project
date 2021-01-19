@@ -8,6 +8,10 @@ export default {
   getCoach(state) {
     return id => state.coaches.find(coach => coach.id === id);
   },
+  getLoggedInCoach(_, getters, _2, rootGetters) {
+    const userId = rootGetters.userId
+    return getters.coaches.find(coach => coach.id === userId)
+  },
   isCoach(_, getters, _2, rootGetters) {
     const coaches = getters.coaches;
     const userId = rootGetters.userId;

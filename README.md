@@ -1,4 +1,4 @@
-# Plan
+## Final Project: Maximilian Schwarzmueller's Vue3 JS course on Udemy
 
 ## MVP
 * Resources to browse, review and contact coaches
